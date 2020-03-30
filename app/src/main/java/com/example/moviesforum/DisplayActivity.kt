@@ -99,9 +99,12 @@ class DisplayActivity : AppCompatActivity() , NavigationView.OnNavigationItemSel
             R.id.discover ->{
                 startActivity(Intent(this,Main3Activity::class.java))
             }
-
-
-
+            R.id.wishlistMovie ->{
+                startActivity(Intent(this,WishlistMovieActivity::class.java))
+            }
+            R.id.wishlistTvSeries ->{
+                startActivity(Intent(this,WishlistTvActivity::class.java))
+            }
         }
         drawer.closeDrawer(GravityCompat.START)   //used to close the navigation drawer when the items inside the drawer are clicked
         return true

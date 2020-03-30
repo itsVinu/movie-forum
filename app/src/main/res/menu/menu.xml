@@ -16,5 +16,14 @@
         android:id="@+id/discover"
         />
 
+    <item
+        android:title="Wishlist Movie"
+        android:id="@+id/wishlistMovie"
+        />
+
+    <item
+        android:title="Wishlist Tv"
+        android:id="@+id/wishlistTvSeries"
+        />
 
 </menu>

@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SimilarTrailerTvActivity"></activity>
+        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".WishlistTvActivity" />
+        <activity android:name=".WishlistMovieActivity" />
+        <activity android:name=".SimilarTrailerTvActivity" />
         <activity android:name=".SimilarMovieTrailerActivity" />
         <activity android:name=".DisplayTvActivity" />
         <activity android:name=".TrailerMovieActivity" />

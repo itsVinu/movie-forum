@@ -3,7 +3,9 @@ package com.example.moviesforum
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import com.example.moviesforum.FragmentViews.MyTvFragmentView
@@ -57,10 +59,32 @@ class Main2Activity : AppCompatActivity() , NavigationView.OnNavigationItemSelec
             R.id.discover ->{
                 startActivity(Intent(this,Main3Activity::class.java))
             }
-
-
+            R.id.wishlistMovie ->{
+                startActivity(Intent(this,WishlistMovieActivity::class.java))
+            }
+            R.id.wishlistTvSeries ->{
+                startActivity(Intent(this,WishlistTvActivity::class.java))
+            }
         }
         drawer.closeDrawer(GravityCompat.START)   //used to close the navigation drawer when the items inside the drawer are clicked
         return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu1, menu)
+        return true
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        val id:Int = item.itemId
+
+        if (id == R.id.search){
+            Toast.makeText(this,"search the news content here", Toast.LENGTH_LONG).show()
+            startActivity(Intent(this,SearchActivity::class.java))
+        }
+        return true
+
     }
 }

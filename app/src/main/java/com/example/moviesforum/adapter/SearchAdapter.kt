@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesforum.Model.SearchModel.ResultsItem
 import com.example.moviesforum.R
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.slider.view.*
 import kotlinx.android.synthetic.main.slider_people.view.*
 
 class SearchAdapter(val list: List<ResultsItem>):
@@ -34,9 +35,9 @@ class SearchAdapter(val list: List<ResultsItem>):
 
         fun bind(user: ResultsItem) {
             itemView.apply {
-                sliderPeopleTv1.text = user.title
-                sliderPeopleTv2.text = user.releaseDate
-                Picasso.get().load("https://image.tmdb.org/t/p/w500" + user.posterPath.toString()).into(sliderPeopleIv)
+                sliderTv1.text = user.title
+                sliderTv2.text = user.releaseDate
+                Picasso.get().load("https://image.tmdb.org/t/p/w500" + user.posterPath.toString()).into(sliderIv)
                 setOnClickListener{
                     onItemClick?.invoke(user)
                 }

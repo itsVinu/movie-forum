@@ -3,40 +3,26 @@ package com.example.moviesforum
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
-import com.example.moviesforum.FragmentViews.MyDiscoverFragmentView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main.*
+import kotlinx.android.synthetic.main.main4.*
 
-class Main3Activity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
+class WishlistTvActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main3)
+        setContentView(R.layout.activity_wishlist_tv)
 
-
-        setSupportActionBar(toolBar)
-
-        //these lines set our adapter
-        val fragmentAdapter =
-            MyDiscoverFragmentView(
-                supportFragmentManager
-            )
-        viewPager.adapter = fragmentAdapter
-
-        // this line will connect our tabLayout with viewPager
-        tabLayout.setupWithViewPager(viewPager)
-
+        setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(
             this,
             drawer,
-            toolBar,
+            toolbar,
             R.string.open,
             R.string.close
         )
@@ -69,24 +55,6 @@ class Main3Activity : AppCompatActivity() , NavigationView.OnNavigationItemSelec
         }
         drawer.closeDrawer(GravityCompat.START)   //used to close the navigation drawer when the items inside the drawer are clicked
         return true
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu1, menu)
-        return true
-    }
-
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        val id:Int = item.itemId
-
-        if (id == R.id.search){
-            Toast.makeText(this,"search the news content here", Toast.LENGTH_LONG).show()
-            startActivity(Intent(this,SearchActivity::class.java))
-        }
-        return true
-
     }
 
 
