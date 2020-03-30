@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="movie"
+        android:id="@+id/movie"
+        />
+
+    <item
+        android:title="Tv Series"
+        android:id="@+id/tvSeries"
+        />
+
+    <item
+        android:title="Discover"
+        android:id="@+id/discover"
+        />
+
+
+</menu>
