@@ -128,10 +128,12 @@ class SearchActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                if (p0!!.length>2){
+                if (!p0!!.isNullOrEmpty()){
                     loadJson(p0.toString())
                 }
-                searchadapter.notifyDataSetChanged()
+                else if(p0.isNullOrEmpty()){
+                 loadJson(p0.toString())
+                }
                 return false
             }
 
@@ -173,6 +175,7 @@ class SearchActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 if (response.isSuccessful){
                     response.body()?.let { res->
                         res.results?.let{
+                            list1.clear()
                             list.clear()
                             list.addAll(it)}
                         runOnUiThread{searchadapter.notifyDataSetChanged()}
@@ -181,7 +184,7 @@ class SearchActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             }
             upcomingadapter.notifyDataSetChanged()
         }
-        else{
+        else if (keyword.isNullOrEmpty()){
             searchRv.apply {
                 layoutManager = LinearLayoutManager(this@SearchActivity,RecyclerView.VERTICAL,false)
                 adapter = upcomingadapter
@@ -203,13 +206,14 @@ class SearchActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     response.body()?.let { res ->
                         res.results?.let {
                             list.clear()
+//                            list1.clear()
                             list1.addAll(it) }
                         runOnUiThread { upcomingadapter.notifyDataSetChanged() }
                     }
                 }
-                    upcomingadapter.notifyDataSetChanged()
+//                    upcomingadapter.notifyDataSetChanged()
             }
-            upcomingadapter.notifyDataSetChanged()
+//            upcomingadapter.notifyDataSetChanged()
         }
         }
     }

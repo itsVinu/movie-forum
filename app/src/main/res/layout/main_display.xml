@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryDark"
     tools:context=".MainActivity">
 
 
@@ -20,6 +20,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
                 android:id="@+id/toolbar1"
                 app:title="Details"
                 style="@android:style/Animation"
@@ -102,6 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
+                android:background="@color/colorPrimaryDark"
                 tools:itemCount="5"
                 android:id="@+id/mainDispRv"/>
 

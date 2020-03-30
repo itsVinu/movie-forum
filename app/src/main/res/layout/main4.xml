@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toolbar"
+            android:background="@color/colorPrimary"
             app:title="Wishlist"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
     </com.google.android.material.appbar.AppBarLayout>
@@ -23,6 +24,6 @@
         android:layout_height="match_parent"
         android:id="@+id/peopleRv"
         tools:itemCount="5"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/colorPrimaryDark"/>
 
 </LinearLayout>

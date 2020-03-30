@@ -20,7 +20,7 @@
         android:id="@+id/navView"
         app:menu="@menu/menu"
         android:background="@color/colorPrimary"
-        app:itemIconTint="@android:color/white"
+        app:itemIconTint="@android:color/background_light"
         app:itemTextColor="@android:color/white"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
