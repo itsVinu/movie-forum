@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.moviesforum.Model.TvModel.casttvresponse.CastItem
+import com.example.moviesforum.Model.Wishes
 import com.example.moviesforum.adapter.castadapter.CastTvAdapter
 import com.example.moviesforum.client.Client
 import com.google.android.material.navigation.NavigationView
@@ -119,8 +119,14 @@ class DisplayTvActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                                     }
                                 }
                                 else{
-                                    db.wishesdao().insert(Wishes(it.name.toString(),it.originalName.toString(),
-                                        it.posterPath.toString(),it.overview.toString(), it.id?.toLong())
+                                    db.wishesdao().insert(
+                                        Wishes(
+                                            it.name.toString(),
+                                            it.originalName.toString(),
+                                            it.posterPath.toString(),
+                                            it.overview.toString(),
+                                            it.id?.toLong()
+                                        )
                                     )
                                     GlobalScope.launch(Dispatchers.Main) {
                                         Toast.makeText(this@DisplayTvActivity,"Added To Wishlist", Toast.LENGTH_SHORT).show()

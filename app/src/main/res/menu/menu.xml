@@ -12,6 +12,11 @@
         />
 
     <item
+        android:title="Genre"
+        android:id="@+id/genre"
+        />
+
+    <item
         android:title="Discover"
         android:id="@+id/discover"
         />

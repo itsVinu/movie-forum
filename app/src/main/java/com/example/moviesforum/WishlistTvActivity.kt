@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import com.example.moviesforum.Model.Wishes
 import com.example.moviesforum.adapter.WishlistAdapter
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.main.*
 import kotlinx.android.synthetic.main.main4.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

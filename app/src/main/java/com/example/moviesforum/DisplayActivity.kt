@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.moviesforum.Model.MovieModel.castmovieresponse.CrewItem
+import com.example.moviesforum.Model.Wishesmovies
 import com.example.moviesforum.adapter.castadapter.CastMovieAdapter
 import com.example.moviesforum.client.Client
 import com.google.android.material.navigation.NavigationView
@@ -108,8 +109,13 @@ class DisplayActivity : AppCompatActivity() , NavigationView.OnNavigationItemSel
                                 }
                                 else{
                                     db.wishesdao().insertMovies(
-                                        Wishesmovies(it.title.toString(),it.originalTitle.toString(),
-                                            it.posterPath.toString(),it.overview.toString(), it.id?.toLong())
+                                        Wishesmovies(
+                                            it.title.toString(),
+                                            it.originalTitle.toString(),
+                                            it.posterPath.toString(),
+                                            it.overview.toString(),
+                                            it.id?.toLong()
+                                        )
                                     )
                                     GlobalScope.launch(Dispatchers.Main) {
                                         Toast.makeText(this@DisplayActivity,"Added To Wishlist", Toast.LENGTH_SHORT).show()

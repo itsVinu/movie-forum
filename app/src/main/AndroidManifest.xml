@@ -11,42 +11,66 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SearchActivity"
+        <activity android:name=".GenreActivity"></activity>
+        <activity
+            android:name=".SearchActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout">
-            ></activity>
-        <activity android:name=".WishlistTvActivity"
+           
+        </activity>
+        <activity
+            android:name=".WishlistTvActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout">
-            ></activity>
-        <activity android:name=".WishlistMovieActivity"
+            
+        </activity>
+        <activity
+            android:name=".WishlistMovieActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout">
-            ></activity>
-        <activity android:name=".SimilarTrailerTvActivity"
+            
+        </activity>
+        <activity
+            android:name=".SimilarTrailerTvActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout">
-            ></activity>
-        <activity android:name=".SimilarMovieTrailerActivity"
+            
+        </activity>
+        <activity
+            android:name=".SimilarMovieTrailerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout">
-            ></activity>
-        <activity android:name=".DisplayTvActivity"
+            
+        </activity>
+        <activity
+            android:name=".DisplayTvActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout">
-            ></activity>
-        <activity android:name=".TrailerMovieActivity"
+            
+        </activity>
+        <activity
+            android:name=".TrailerMovieActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout">
-            ></activity>
-        <activity android:name=".TrailerTvActivity"
+            
+        </activity>
+        <activity
+            android:name=".TrailerTvActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout">
-            ></activity>
-        <activity android:name=".DisplayActivity"
+            
+        </activity>
+        <activity
+            android:name=".DisplayActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout">
-            ></activity>
-        <activity android:name=".Main3Activity"
+            
+        </activity>
+        <activity
+            android:name=".Main3Activity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout">
-            ></activity>
-        <activity android:name=".Main2Activity"
+            
+        </activity>
+        <activity
+            android:name=".Main2Activity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout">
-            ></activity>
-        <activity android:name=".MainActivity"
+            
+        </activity>
+        <activity
+            android:name=".MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout">
-            >
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

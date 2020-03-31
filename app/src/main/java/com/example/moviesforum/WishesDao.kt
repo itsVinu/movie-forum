@@ -2,16 +2,17 @@ package com.example.moviesforum
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.moviesforum.Model.Wishes
+import com.example.moviesforum.Model.Wishesmovies
 import java.util.List
 
 @Dao
 interface WishesDao {
 
     @Insert
-    suspend fun insert(user:Wishes)
+    suspend fun insert(user: Wishes)
 
     @Insert
     suspend fun insertAllUsers(user:List<Wishes>)
@@ -23,7 +24,7 @@ interface WishesDao {
     fun deleteTask(uid:Long)
 
     @Insert
-    suspend fun insertMovies(user:Wishesmovies)
+    suspend fun insertMovies(user: Wishesmovies)
 
     @Insert
     suspend fun insertAllUsersMovies(user:List<Wishesmovies>)

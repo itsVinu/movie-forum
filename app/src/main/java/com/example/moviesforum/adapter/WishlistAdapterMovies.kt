@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesforum.R
-import com.example.moviesforum.Wishesmovies
+import com.example.moviesforum.Model.Wishesmovies
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.slider.view.*
 

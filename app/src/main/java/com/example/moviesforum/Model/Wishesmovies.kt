@@ -1,10 +1,10 @@
-package com.example.moviesforum
+package com.example.moviesforum.Model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Wishes(
+data class Wishesmovies(
     val name:String,
     val original_name:String,
     val posterPath:String,
