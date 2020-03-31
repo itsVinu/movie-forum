@@ -3,15 +3,44 @@ package com.example.moviesforum
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import com.example.moviesforum.adapter.WishlistAdapter
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main.*
 import kotlinx.android.synthetic.main.main4.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.util.*
 
 class WishlistTvActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+
+    val db by lazy {
+        Room.databaseBuilder(
+            this,
+            AppDatabase::class.java,
+            "app.db")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    val list = arrayListOf<Wishes>()
+    val wishlistAdapter = WishlistAdapter(list)
+    var trigger = MutableLiveData<Boolean>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +48,7 @@ class WishlistTvActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
         setSupportActionBar(toolbar)
 
-        val toggle = ActionBarDrawerToggle(
+        val toogle = ActionBarDrawerToggle(
             this,
             drawer,
             toolbar,
@@ -27,10 +56,40 @@ class WishlistTvActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             R.string.close
         )
 
-        drawer.addDrawerListener(toggle)
-        toggle.syncState()
+        drawer.addDrawerListener(toogle)
+        toogle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+
+
+        db.wishesdao().getAllUsers().observe(this, Observer {
+            if (!it.isNullOrEmpty()){
+                list.clear()
+                trigger.value = true
+                list.addAll(it)
+                wishlistAdapter.notifyDataSetChanged()
+            }
+            else{
+                list.clear()
+                wishlistAdapter.notifyDataSetChanged()
+            }
+
+        })
+
+        peopleRv.apply {
+            layoutManager = LinearLayoutManager(this@WishlistTvActivity, RecyclerView.VERTICAL,false)
+            adapter = wishlistAdapter
+        }
+
+        wishlistAdapter.onItemClick = {
+
+            val i = Intent(this,DisplayTvActivity::class.java)
+            i.putExtra("tvid",it.id.toString())
+            startActivity(i)
+        }
+
+        val itemTouchHelper = ItemTouchHelper(simpleCallback)
+        return itemTouchHelper.attachToRecyclerView(peopleRv)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -58,4 +117,105 @@ class WishlistTvActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
     }
 
 
+
+
+    val simpleCallback = object : ItemTouchHelper.SimpleCallback(
+        ItemTouchHelper.START
+                or ItemTouchHelper.END
+                or ItemTouchHelper.UP
+                or ItemTouchHelper.DOWN,
+        ItemTouchHelper.LEFT
+                or ItemTouchHelper.RIGHT
+    ){
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+
+            val fromPosition = viewHolder.adapterPosition
+            val toPosition = target.adapterPosition
+
+            Collections.swap(list,fromPosition,toPosition)
+            peopleRv.adapter?.notifyItemMoved(fromPosition,toPosition)
+            return false
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+            val position = viewHolder.adapterPosition
+
+            if (direction == ItemTouchHelper.LEFT){
+                GlobalScope.launch(Dispatchers.IO) { db.wishesdao().deleteTask(wishlistAdapter.getItemId(position)) }
+
+            }
+            else if (direction == ItemTouchHelper.RIGHT){
+                GlobalScope.launch(Dispatchers.IO) { db.wishesdao().deleteTask(wishlistAdapter.getItemId(position)) }
+            }
+        }
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu2,menu)
+
+        val item = menu?.findItem(R.id.search)
+        val searchView = item?.actionView as SearchView
+        searchView.setQueryHint("type here to search")
+
+        item.setOnActionExpandListener(object : MenuItem.OnActionExpandListener{
+            override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+                displayTodo()
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+                displayTodo()
+                return true
+            }
+        })
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if(!newText.isNullOrEmpty()){
+                    displayTodo(newText)
+                }
+                return true
+            }
+
+        })
+        return super.onCreateOptionsMenu(menu)
+    }
+
+
+    fun displayTodo(newText:String = ""){
+        db.wishesdao().getAllUsers().observe(this,Observer{
+            if (it.isNotEmpty()){
+                list.clear()
+                list.addAll(
+                    it.filter {todo ->
+                        todo.name.contains(newText,true)
+                    }
+                )
+                wishlistAdapter.notifyDataSetChanged()
+            }
+        })
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+
+        if (id == R.id.search){
+            Toast.makeText(this,"search clicked",Toast.LENGTH_SHORT).show()
+        }
+        return true
+    }
+
 }
+
+

@@ -4,10 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.example.moviesforum.Model.MovieModel.castmovieresponse.CrewItem
 import com.example.moviesforum.adapter.castadapter.CastMovieAdapter
 import com.example.moviesforum.client.Client
@@ -24,6 +27,17 @@ class DisplayActivity : AppCompatActivity() , NavigationView.OnNavigationItemSel
 
     val list = arrayListOf<CrewItem>()
     val castmovieadapter = CastMovieAdapter(list)
+
+    val db by lazy {
+        Room.databaseBuilder(this,
+            AppDatabase::class.java,
+            "app.db")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    var trigger = MutableLiveData<Boolean>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +85,44 @@ class DisplayActivity : AppCompatActivity() , NavigationView.OnNavigationItemSel
                 }
             }
         }
+
+        var lists = arrayListOf<Long>()
+
+        wishlistBtn.setOnClickListener {
+            val i = Intent(this,WishlistMovieActivity::class.java)
+
+            trigger.value = false
+
+            GlobalScope.launch {
+                val response = withContext(Dispatchers.IO){Client.api.getAllDetailMovies(movie_id)}
+
+                if (response.isSuccessful){
+                    response.body()?.let {
+                        GlobalScope.launch(Dispatchers.Main) {
+                            val a = withContext(Dispatchers.IO){
+                                lists = db.wishesdao().getAllUsersMoviesId() as ArrayList<Long>
+                                if (lists.contains(movie_id.toLong())){
+                                    GlobalScope.launch(Dispatchers.Main) {
+                                        Toast.makeText(this@DisplayActivity,"Present in the wishlist",Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                                else{
+                                    db.wishesdao().insertMovies(
+                                        Wishesmovies(it.title.toString(),it.originalTitle.toString(),
+                                            it.posterPath.toString(),it.overview.toString(), it.id?.toLong())
+                                    )
+                                    GlobalScope.launch(Dispatchers.Main) {
+                                        Toast.makeText(this@DisplayActivity,"Added To Wishlist", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            i.putExtra("movieid",movie_id)
+        }
+
 
         val toggle = ActionBarDrawerToggle(
             this,
