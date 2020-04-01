@@ -1,34 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <group android:checkableBehavior="single">
+
     <item
         android:title="movie"
         android:id="@+id/movie"
+        android:icon="@drawable/ic_movie_white_24dp"
         />
 
     <item
         android:title="Tv Series"
         android:id="@+id/tvSeries"
+        android:icon="@drawable/ic_tv_white_24dp"
         />
 
-    <item
-        android:title="Genre"
-        android:id="@+id/genre"
-        />
+<!--    <item-->
+<!--        android:title="Genre"-->
+<!--        android:id="@+id/genre"-->
+<!--        />-->
+
+    </group>
 
     <item
         android:title="Discover"
         android:id="@+id/discover"
         />
 
+    <item android:title="Your Lists">
+        <menu>
+            <group android:checkableBehavior="single">
+
     <item
         android:title="Wishlist Movie"
         android:id="@+id/wishlistMovie"
+        android:icon="@drawable/ic_watchlist_white_24dp"
         />
 
     <item
         android:title="Wishlist Tv"
         android:id="@+id/wishlistTvSeries"
+        android:icon="@drawable/ic_watchlist_white_24dp"
         />
+            </group>
+        </menu>
+    </item>
 
 </menu>
