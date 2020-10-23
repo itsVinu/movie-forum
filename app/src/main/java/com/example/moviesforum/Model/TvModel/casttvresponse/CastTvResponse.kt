@@ -11,5 +11,5 @@ data class CastTvResponse(
 	val id: Int? = null,
 
 	@field:SerializedName("crew")
-	val crew: List<Any?>? = null
+	val crew: List<Any>? = null
 )

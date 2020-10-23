@@ -1,17 +1,13 @@
-package com.example.moviesforum.FragmentViews
+package com.example.moviesforum.adapter.FragmentAdapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.moviesforum.DiscoverFragments.MovieDiscoverFragment
-import com.example.moviesforum.DiscoverFragments.TvDiscoverFragment
-import com.example.moviesforum.MovieFragments.NowPlayingFragment
-import com.example.moviesforum.MovieFragments.PopularFragment
-import com.example.moviesforum.MovieFragments.TopRatedFragment
-import com.example.moviesforum.MovieFragments.UpcomingFragment
+import com.example.moviesforum.fragment.DiscoverFragments.MovieDiscoverFragment
+import com.example.moviesforum.fragment.DiscoverFragments.TvDiscoverFragment
 
 @Suppress("DEPRECATION")
-class MyDiscoverFragmentView (fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class MyDiscoverFragmentAdapter (fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
 
         return when(position) {

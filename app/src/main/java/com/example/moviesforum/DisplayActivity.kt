@@ -11,7 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.example.moviesforum.Model.MovieModel.castmovieresponse.CrewItem
+import com.example.moviesforum.Model.MovieModel.castmovieresponse.CastItem
 import com.example.moviesforum.Model.Wishesmovies
 import com.example.moviesforum.adapter.castadapter.CastMovieAdapter
 import com.example.moviesforum.client.Client
@@ -26,7 +26,7 @@ import kotlinx.coroutines.withContext
 
 class DisplayActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
 
-    val list = arrayListOf<CrewItem>()
+    val list = arrayListOf<CastItem>()
     val castmovieadapter = CastMovieAdapter(list)
 
     val db by lazy {
@@ -39,14 +39,13 @@ class DisplayActivity : AppCompatActivity() , NavigationView.OnNavigationItemSel
 
     var trigger = MutableLiveData<Boolean>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display)
 
         setSupportActionBar(toolbar1)
 
-        val movie_id = intent.getStringExtra("movieid")
+        val movie_id = intent.getStringExtra("movieid")!!
 
 
         trailerBtn.setOnClickListener{
@@ -56,7 +55,7 @@ class DisplayActivity : AppCompatActivity() , NavigationView.OnNavigationItemSel
         }
 
         GlobalScope.launch {
-            val response = withContext(Dispatchers.IO) { Client.api.getAllDetailMovies(movie_id)}
+            val response = withContext(Dispatchers.IO) { Client.api.getAllDetailsMovie(movie_id)}
             if (response.isSuccessful){
                 response.body()?.let {
                     runOnUiThread{
@@ -76,10 +75,10 @@ class DisplayActivity : AppCompatActivity() , NavigationView.OnNavigationItemSel
         }
 
         GlobalScope.launch {
-            val response = withContext(Dispatchers.IO) { Client.api.getAllCastMovies(movie_id) }
+            val response = withContext(Dispatchers.IO) { Client.api.getAllCastMovie(movie_id) }
             if (response.isSuccessful) {
                 response.body()?.let { res ->
-                    res.crew?.let {
+                    res.cast?.let {
                         list.addAll(it)
                     }
                     runOnUiThread { castmovieadapter.notifyDataSetChanged() }
@@ -95,7 +94,7 @@ class DisplayActivity : AppCompatActivity() , NavigationView.OnNavigationItemSel
             trigger.value = false
 
             GlobalScope.launch {
-                val response = withContext(Dispatchers.IO){Client.api.getAllDetailMovies(movie_id)}
+                val response = withContext(Dispatchers.IO){Client.api.getAllDetailsMovie(movie_id)}
 
                 if (response.isSuccessful){
                     response.body()?.let {

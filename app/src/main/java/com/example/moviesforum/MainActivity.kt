@@ -1,7 +1,5 @@
 package com.example.moviesforum
 
-import android.app.SearchManager
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,15 +8,10 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
-import com.example.moviesforum.FragmentViews.MyMovieFragmentView
-import com.example.moviesforum.client.Client
+import com.example.moviesforum.adapter.FragmentAdapter.MyMovieFragmentAdapter
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
 
@@ -30,7 +23,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
         //these lines set our adapter
         val fragmentAdapter =
-            MyMovieFragmentView(
+            MyMovieFragmentAdapter(
                 supportFragmentManager
             )
         viewPager.adapter = fragmentAdapter

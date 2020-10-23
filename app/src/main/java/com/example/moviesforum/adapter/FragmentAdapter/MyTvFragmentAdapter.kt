@@ -1,19 +1,15 @@
-package com.example.moviesforum.FragmentViews
+package com.example.moviesforum.adapter.FragmentAdapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.moviesforum.MovieFragments.NowPlayingFragment
-import com.example.moviesforum.MovieFragments.PopularFragment
-import com.example.moviesforum.MovieFragments.TopRatedFragment
-import com.example.moviesforum.MovieFragments.UpcomingFragment
-import com.example.moviesforum.TvFragments.AiringTodayFragment
-import com.example.moviesforum.TvFragments.OnTheAirFragment
-import com.example.moviesforum.TvFragments.PopularTvFragment
-import com.example.moviesforum.TvFragments.TopRatedTvFragment
+import com.example.moviesforum.fragment.TvFragments.AiringTodayFragment
+import com.example.moviesforum.fragment.TvFragments.OnTheAirFragment
+import com.example.moviesforum.fragment.TvFragments.PopularTvFragment
+import com.example.moviesforum.fragment.TvFragments.TopRatedTvFragment
 
 @Suppress("DEPRECATION")
-class MyTvFragmentView (fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class MyTvFragmentAdapter (fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
 
         return when(position) {

@@ -1,4 +1,4 @@
-package com.example.moviesforum.MovieFragments
+package com.example.moviesforum.fragment.MovieFragments
 
 
 import android.content.Intent

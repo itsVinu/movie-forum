@@ -65,7 +65,7 @@ class DisplayTvActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
 
         GlobalScope.launch {
-            val response = withContext(Dispatchers.IO) { Client.api.getAllDetailTv(tv_id)}
+            val response = withContext(Dispatchers.IO) { Client.api.getAllDetailsTv(tv_id)}
             if (response.isSuccessful){
                 response.body()?.let {
                     runOnUiThread{
@@ -106,7 +106,7 @@ class DisplayTvActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             trigger.value = false
 
             GlobalScope.launch {
-                val response = withContext(Dispatchers.IO){Client.api.getAllDetailTv(tv_id)}
+                val response = withContext(Dispatchers.IO){Client.api.getAllDetailsTv(tv_id)}
 
                 if (response.isSuccessful){
                     response.body()?.let {

@@ -4,15 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviesforum.Model.MovieModel.castmovieresponse.CastItem
 import com.example.moviesforum.Model.MovieModel.castmovieresponse.CrewItem
 import com.example.moviesforum.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.slidercast.view.*
 
-class CastMovieAdapter(val list: List<CrewItem>):
+class CastMovieAdapter(val list: List<CastItem>):
     RecyclerView.Adapter<CastMovieAdapter.UserViewHolder>() {
 
-    var onItemClick: ((user: CrewItem) -> Unit)? = null
+    var onItemClick: ((user: CastItem) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(
@@ -32,10 +33,10 @@ class CastMovieAdapter(val list: List<CrewItem>):
 
     inner class UserViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
-        fun bind(user: CrewItem) {
+        fun bind(user: CastItem) {
             itemView.apply {
                 slidercastTv1.text = user.name
-                slidercastTv2.text = user.job
+                slidercastTv2.text = user.character
                 Picasso.get().load("https://image.tmdb.org/t/p/w500" + user.profilePath.toString()).into(slidercastIv)
                 setOnClickListener{
                     onItemClick?.invoke(user)

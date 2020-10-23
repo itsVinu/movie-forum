@@ -68,7 +68,7 @@ class SimilarMovieTrailerActivity : AppCompatActivity() {
         }
 
         GlobalScope.launch {
-            val response = withContext(Dispatchers.IO){ Client.api.getAllMovieSimilar(movie_id)}
+            val response = withContext(Dispatchers.IO){ Client.api.getAllSimilarMovie(movie_id)}
             if (response.isSuccessful){
                 response.body()?.let { res->
                     res.results?.let {

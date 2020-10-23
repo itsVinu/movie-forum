@@ -1,4 +1,4 @@
-package com.example.moviesforum.MovieFragments
+package com.example.moviesforum.fragment.MovieFragments
 
 
 import android.content.Intent
@@ -40,9 +40,9 @@ class NowPlayingFragment : Fragment() {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL,false)
             adapter = nowplayingadapter
         }
+
         nowplayingadapter.onItemClick = {
             Toast.makeText(context,"now playing", Toast.LENGTH_LONG).show()
-
             val intent = Intent(context,DisplayActivity::class.java)
             intent.putExtra("movieid",it.id.toString())
             startActivity(intent)

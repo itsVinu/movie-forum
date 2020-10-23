@@ -1,15 +1,15 @@
-package com.example.moviesforum.FragmentViews
+package com.example.moviesforum.adapter.FragmentAdapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.moviesforum.MovieFragments.NowPlayingFragment
-import com.example.moviesforum.MovieFragments.PopularFragment
-import com.example.moviesforum.MovieFragments.TopRatedFragment
-import com.example.moviesforum.MovieFragments.UpcomingFragment
+import com.example.moviesforum.fragment.MovieFragments.NowPlayingFragment
+import com.example.moviesforum.fragment.MovieFragments.PopularFragment
+import com.example.moviesforum.fragment.MovieFragments.TopRatedFragment
+import com.example.moviesforum.fragment.MovieFragments.UpcomingFragment
 
 @Suppress("DEPRECATION")
-class MyMovieFragmentView (fm:FragmentManager) : FragmentPagerAdapter(fm) {
+class MyMovieFragmentAdapter (fm:FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
 
         return when(position) {
@@ -30,7 +30,6 @@ class MyMovieFragmentView (fm:FragmentManager) : FragmentPagerAdapter(fm) {
     }
 
     override fun getCount(): Int {      // this method return 3 tabs
-
         return 4
     }
 

@@ -27,7 +27,7 @@ class TrailerMovieActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trailer)
 
-        val movie_id = intent.getStringExtra("movieid")
+        val movie_id = intent.getStringExtra("movieid")!!
 
 
         GlobalScope.launch {
@@ -69,7 +69,7 @@ class TrailerMovieActivity : AppCompatActivity() {
         }
 
         GlobalScope.launch {
-            val response = withContext(Dispatchers.IO){Client.api.getAllMovieSimilar(movie_id)}
+            val response = withContext(Dispatchers.IO){Client.api.getAllSimilarMovie(movie_id)}
             if (response.isSuccessful){
                 response.body()?.let { res->
                     res.results?.let {
